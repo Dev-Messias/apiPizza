@@ -13,14 +13,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//criar uma migration: npx prisma migrate dev
+//criar uma migration: npx prisma migrate dev --name nome-da-migration
 model User {
-  id String @id @default(uuid())
-  name String
-  email String
-  password String
+  id         String    @id @default(uuid())
+  name       String
+  email      String
+  password   String
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
 
-  @@map("users")//nome da tabela no banco
+  @@map("users") //nome da tabela no banco
+}
+
+model Category {
+  id         String    @id @default(uuid())
+  name       String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  //relacionamento: uma categoria pode esta cadastrada em varios produtos 1:n
+  products   Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id          String    @id @default(uuid())
+  name        String
+  price       String
+  description String
+  banner      String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  //relacionamento 
+  category    Category @relation(fields: [category_id], references: [id]) //passando o id da categoria para o campo category_id
+  
+
+  @@map("products")
+  category_id String //campo na tabela
+  items Item[]
+}
+
+model Order {
+  id     String  @id @default(uuid())
+  table  Int //numero da mesa
+  status Boolean @default(false) //so sera true quando concluir o pedido
+  draft  Boolean @default(true) //pedido rascunho
+  name   String? //nome cliente mesa opcional
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("orders")
+  //relacao 1:n item
+  items Item[]
+}
+
+model Item {
+  id     String @id @default(uuid())
+  amount Int //qtd
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  order Order @relation(fields: [order_id], references: [id])
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@map("items")
+  order_id String
+  product_id String
 }
