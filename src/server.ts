@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';//importar sempre como segundo import
 import cors from 'cors';
 import {router} from './routes';
+import  path from 'path';
 
 const app = express();
 
@@ -12,6 +13,12 @@ app.use(cors());//liberando para qualquer ip
 
 //qual arquivo vamos usar as rotas
 app.use(router);
+
+//permitindo acesso a pasta das imagens, rota statica
+app.use(
+    '/files',
+    express.static(path.resolve(__dirname, '..', 'tmp'))
+)
 
 //tratando erro
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
