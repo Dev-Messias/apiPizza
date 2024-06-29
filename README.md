@@ -1,6 +1,6 @@
 # Api Pizzaria
 
-<img src="https://blog.soaresdev.com/static/18f43b3033c239da5d2525cfd9fdc98f/d9199/nodejs-api-rest.png" alt="Nodejs">
+<img src="https://bs-uploads.toptal.io/blackfish-uploads/components/seo/5830595/og_image/optimized/1-331d350d67cb0fbf52807f12b1f7efa4.png" alt="Nodejs">
 
 > Este repositório contém uma API desenvolvida em Node.js, utilizando TypeScript, Prisma, Express e PostgreSQL. A API foi projetada para gerenciar pedidos em uma pizzaria, permitindo que os garçons registrem os pedidos das mesas e que esses pedidos sejam exibidos na cozinha para preparação.
 
