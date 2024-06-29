@@ -71,7 +71,7 @@ $ npm run dev
 
 ```
 <br>
-##Endpoints Principais
+## Endpoints Principais
 
 - Mesas:
     - `POST /order` : Cria uma nova mesa.
