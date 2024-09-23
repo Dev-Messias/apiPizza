@@ -3,6 +3,7 @@ import 'express-async-errors';//importar sempre como segundo import
 import cors from 'cors';
 import {router} from './routes';
 import  path from 'path';
+import fileUpload from 'express-fileupload';
 
 const app = express();
 
@@ -10,6 +11,10 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());//liberando para qualquer ip
+
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 } // no maximo 50mb img
+}))
 
 //qual arquivo vamos usar as rotas
 app.use(router);
@@ -37,4 +42,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     })
 })
 
-app.listen(3333, () => console.log("Servidor online!"))
+app.listen(process.env.PORT, () => console.log("Servidor online!"))
